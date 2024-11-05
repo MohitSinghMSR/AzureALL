@@ -90,6 +90,19 @@
 								"url": "https://file_incompatible",
 								"body": "Dummy"
 							}
+						},
+						{
+							"name": "Fail1",
+							"type": "Fail",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"message": "It failed as Count do not match",
+								"errorCode": {
+									"value": "@activity('Get File matadata').output",
+									"type": "Expression"
+								}
+							}
 						}
 					],
 					"ifTrueActivities": [
