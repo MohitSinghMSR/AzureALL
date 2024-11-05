@@ -19,6 +19,10 @@
 			"type": "string",
 			"defaultValue": "https://storagedlmsr.dfs.core.windows.net/"
 		},
+		"tr_populationData_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/e418e5e7-fa19-48bd-95c2-fffb8c0f2d20/resourceGroups/dp203-8q21z67/providers/Microsoft.Storage/storageAccounts/storagenormalmsr"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -54,6 +58,9 @@
 					},
 					"ls_adls_reporting_properties_typeProperties_url": {
 						"value": "[parameters('ls_adls_reporting_properties_typeProperties_url')]"
+					},
+					"tr_populationData_properties_typeProperties_scope": {
+						"value": "[parameters('tr_populationData_properties_typeProperties_scope')]"
 					}
 				}
 			},
