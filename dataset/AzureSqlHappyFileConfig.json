@@ -1,0 +1,25 @@
+{
+	"name": "AzureSqlHappyFileConfig",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_Happy",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "sourceRelativeUrl",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sinkFileName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "trigger_azure"
+		}
+	}
+}
