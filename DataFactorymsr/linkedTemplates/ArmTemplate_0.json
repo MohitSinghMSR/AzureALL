@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_adls_reporting'"
 		},
+		"AzureSqlDatabase_Happy_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase_Happy'"
+		},
 		"ls_adls_reporting_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://storagedlmsr.dfs.core.windows.net/"
@@ -22,6 +26,18 @@
 		"ls_http_opendata_ecdc_europe_eu_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://github.com/"
+		},
+		"AzureSqlDatabase_Happy_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "happyservermsr.database.windows.net"
+		},
+		"AzureSqlDatabase_Happy_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Happy"
+		},
+		"AzureSqlDatabase_Happy_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "ms2901"
 		},
 		"tr_ingest_hospital_admissions_data_properties_pls_ingest_ecdc_data_parameters_sourceRelativeurl": {
 			"type": "string",
@@ -81,6 +97,28 @@
 					"url": "[parameters('ls_http_opendata_ecdc_europe_eu_properties_typeProperties_url')]",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase_Happy')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_server')]",
+					"database": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase_Happy_password')]"
+					}
 				}
 			},
 			"dependsOn": []
@@ -212,6 +250,36 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ls_ablob_reporting')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlHappyFileConfig')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_Happy",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "sourceRelativeUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "sinkFileName",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "trigger_azure"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_Happy')]"
 			]
 		},
 		{

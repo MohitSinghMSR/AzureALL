@@ -11,6 +11,9 @@
 		"ls_adls_reporting_accountKey": {
 			"value": ""
 		},
+		"AzureSqlDatabase_Happy_password": {
+			"value": ""
+		},
 		"ls_adls_reporting_properties_typeProperties_url": {
 			"value": "https://storagedlmsr.dfs.core.windows.net/"
 		},
@@ -25,6 +28,15 @@
 		},
 		"tr_populationData_properties_typeProperties_scope": {
 			"value": "/subscriptions/e418e5e7-fa19-48bd-95c2-fffb8c0f2d20/resourceGroups/dp203-8q21z67/providers/Microsoft.Storage/storageAccounts/storagenormalmsr"
+		},
+		"AzureSqlDatabase_Happy_properties_typeProperties_server": {
+			"value": "happyservermsr.database.windows.net"
+		},
+		"AzureSqlDatabase_Happy_properties_typeProperties_database": {
+			"value": "Happy"
+		},
+		"AzureSqlDatabase_Happy_properties_typeProperties_userName": {
+			"value": "ms2901"
 		},
 		"containerUri": {
 			"value": ""

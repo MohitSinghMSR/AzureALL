@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_adls_reporting'"
 		},
+		"AzureSqlDatabase_Happy_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase_Happy'"
+		},
 		"ls_adls_reporting_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://storagedlmsr.dfs.core.windows.net/"
@@ -34,6 +38,18 @@
 		"tr_populationData_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/e418e5e7-fa19-48bd-95c2-fffb8c0f2d20/resourceGroups/dp203-8q21z67/providers/Microsoft.Storage/storageAccounts/storagenormalmsr"
+		},
+		"AzureSqlDatabase_Happy_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "happyservermsr.database.windows.net"
+		},
+		"AzureSqlDatabase_Happy_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Happy"
+		},
+		"AzureSqlDatabase_Happy_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "ms2901"
 		},
 		"containerUri": {
 			"type": "string",
@@ -68,11 +84,23 @@
 					"ls_adls_reporting_accountKey": {
 						"value": "[parameters('ls_adls_reporting_accountKey')]"
 					},
+					"AzureSqlDatabase_Happy_password": {
+						"value": "[parameters('AzureSqlDatabase_Happy_password')]"
+					},
 					"ls_adls_reporting_properties_typeProperties_url": {
 						"value": "[parameters('ls_adls_reporting_properties_typeProperties_url')]"
 					},
 					"ls_http_opendata_ecdc_europe_eu_properties_typeProperties_url": {
 						"value": "[parameters('ls_http_opendata_ecdc_europe_eu_properties_typeProperties_url')]"
+					},
+					"AzureSqlDatabase_Happy_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase_Happy_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase_Happy_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_userName')]"
 					},
 					"tr_ingest_hospital_admissions_data_properties_pls_ingest_ecdc_data_parameters_sourceRelativeurl": {
 						"value": "[parameters('tr_ingest_hospital_admissions_data_properties_pls_ingest_ecdc_data_parameters_sourceRelativeurl')]"
