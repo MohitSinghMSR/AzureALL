@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "https://raw.githubusercontent.com/cloudboxacademy/covid19/blob/main/raw/main/ecdc_data/cases_deaths.csv",
+			"url": "https://raw.githubusercontent.com",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
