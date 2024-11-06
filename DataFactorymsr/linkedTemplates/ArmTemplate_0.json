@@ -553,8 +553,9 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2024-11-06T19:30:00",
-						"timeZone": "Eastern Standard Time"
+						"startTime": "2024-11-06T19:48:00",
+						"timeZone": "Azores Standard Time",
+						"schedule": {}
 					}
 				}
 			},
