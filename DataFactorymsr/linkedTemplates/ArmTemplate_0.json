@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataFactorymsr"
 		},
+		"AzureSqlDatabase_Happy_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase_Happy'"
+		},
 		"ls_ablob_reporting_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_ablob_reporting'"
@@ -14,18 +18,6 @@
 		"ls_adls_reporting_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_adls_reporting'"
-		},
-		"AzureSqlDatabase_Happy_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'AzureSqlDatabase_Happy'"
-		},
-		"ls_adls_reporting_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://storagedlmsr.dfs.core.windows.net/"
-		},
-		"ls_http_opendata_ecdc_europe_eu_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://github.com/"
 		},
 		"AzureSqlDatabase_Happy_properties_typeProperties_server": {
 			"type": "string",
@@ -38,6 +30,14 @@
 		"AzureSqlDatabase_Happy_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "ms2901"
+		},
+		"ls_adls_reporting_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storagedlmsr.dfs.core.windows.net/"
+		},
+		"ls_http_opendata_ecdc_europe_eu_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().base_url}"
 		},
 		"tr_ingest_hospital_admissions_data_properties_pls_ingest_ecdc_data_parameters_sourceRelativeurl": {
 			"type": "string",
@@ -56,6 +56,28 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase_Happy')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_server')]",
+					"database": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase_Happy_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ls_ablob_reporting')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -91,6 +113,11 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"base_url": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "HttpServer",
 				"typeProperties": {
@@ -102,26 +129,34 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase_Happy')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AzureSqlHappyFileConfig')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_Happy",
+					"type": "LinkedServiceReference"
+				},
 				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"server": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_server')]",
-					"database": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_database')]",
-					"encrypt": "optional",
-					"trustServerCertificate": false,
-					"authenticationType": "SQL",
-					"userName": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('AzureSqlDatabase_Happy_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "sourceRelativeUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "sinkFileName",
+						"type": "nvarchar"
 					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "trigger_azure"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_Happy')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ds_ecdc_raw_csv_dl')]",
@@ -167,10 +202,19 @@
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "ls_http_opendata_ecdc_europe_eu",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"base_url": {
+							"value": "@dataset().baseurl",
+							"type": "Expression"
+						}
+					}
 				},
 				"parameters": {
 					"relativeurl": {
+						"type": "string"
+					},
+					"baseurl": {
 						"type": "string"
 					}
 				},
@@ -250,36 +294,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ls_ablob_reporting')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlHappyFileConfig')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase_Happy",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "sourceRelativeUrl",
-						"type": "nvarchar"
-					},
-					{
-						"name": "sinkFileName",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "trigger_azure"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_Happy')]"
 			]
 		},
 		{
@@ -561,6 +575,10 @@
 									"relativeurl": {
 										"value": "@pipeline().parameters.sourceRelativeurl",
 										"type": "Expression"
+									},
+									"baseurl": {
+										"value": "@pipeline().parameters.baseurl",
+										"type": "Expression"
 									}
 								}
 							}
@@ -587,6 +605,9 @@
 						"type": "string"
 					},
 					"sinkFileName": {
+						"type": "string"
+					},
+					"baseurl": {
 						"type": "string"
 					}
 				},
@@ -622,8 +643,7 @@
 						"frequency": "Day",
 						"interval": 1,
 						"startTime": "2024-11-06T01:24:00",
-						"timeZone": "India Standard Time",
-						"schedule": {}
+						"timeZone": "India Standard Time"
 					}
 				}
 			},

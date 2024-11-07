@@ -5,29 +5,14 @@
 		"factoryName": {
 			"value": "DataFactorymsr"
 		},
+		"AzureSqlDatabase_Happy_password": {
+			"value": ""
+		},
 		"ls_ablob_reporting_connectionString": {
 			"value": ""
 		},
 		"ls_adls_reporting_accountKey": {
 			"value": ""
-		},
-		"AzureSqlDatabase_Happy_password": {
-			"value": ""
-		},
-		"ls_adls_reporting_properties_typeProperties_url": {
-			"value": "https://storagedlmsr.dfs.core.windows.net/"
-		},
-		"ls_http_opendata_ecdc_europe_eu_properties_typeProperties_url": {
-			"value": "https://github.com/"
-		},
-		"tr_ingest_hospital_admissions_data_properties_pls_ingest_ecdc_data_parameters_sourceRelativeurl": {
-			"value": "cloudboxacademy/covid19/blob/main/raw/main/ecdc_data/hospital_admissions.csv"
-		},
-		"tr_ingest_hospital_admissions_data_properties_pls_ingest_ecdc_data_parameters_sinkFileName": {
-			"value": "hospital_admissions.csv"
-		},
-		"tr_populationData_properties_typeProperties_scope": {
-			"value": "/subscriptions/e418e5e7-fa19-48bd-95c2-fffb8c0f2d20/resourceGroups/dp203-8q21z67/providers/Microsoft.Storage/storageAccounts/storagenormalmsr"
 		},
 		"AzureSqlDatabase_Happy_properties_typeProperties_server": {
 			"value": "happyservermsr.database.windows.net"
@@ -37,6 +22,21 @@
 		},
 		"AzureSqlDatabase_Happy_properties_typeProperties_userName": {
 			"value": "ms2901"
+		},
+		"ls_adls_reporting_properties_typeProperties_url": {
+			"value": "https://storagedlmsr.dfs.core.windows.net/"
+		},
+		"ls_http_opendata_ecdc_europe_eu_properties_typeProperties_url": {
+			"value": "@{linkedService().base_url}"
+		},
+		"tr_ingest_hospital_admissions_data_properties_pls_ingest_ecdc_data_parameters_sourceRelativeurl": {
+			"value": "cloudboxacademy/covid19/blob/main/raw/main/ecdc_data/hospital_admissions.csv"
+		},
+		"tr_ingest_hospital_admissions_data_properties_pls_ingest_ecdc_data_parameters_sinkFileName": {
+			"value": "hospital_admissions.csv"
+		},
+		"tr_populationData_properties_typeProperties_scope": {
+			"value": "/subscriptions/e418e5e7-fa19-48bd-95c2-fffb8c0f2d20/resourceGroups/dp203-8q21z67/providers/Microsoft.Storage/storageAccounts/storagenormalmsr"
 		}
 	}
 }
