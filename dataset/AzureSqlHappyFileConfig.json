@@ -9,6 +9,10 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
+				"name": "baseurl",
+				"type": "nvarchar"
+			},
+			{
 				"name": "sourceRelativeUrl",
 				"type": "nvarchar"
 			},

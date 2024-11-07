@@ -99,7 +99,10 @@
 											"value": "@item().sourceRelativeurl",
 											"type": "Expression"
 										},
-										"baseurl": "https://github.com/"
+										"baseurl": {
+											"value": "@item().baseurl",
+											"type": "Expression"
+										}
 									}
 								}
 							],
