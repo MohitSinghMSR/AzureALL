@@ -1,0 +1,17 @@
+{
+	"name": "IngestALLFilesParameters",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2024-11-07T01:45:00",
+				"timeZone": "Eastern Standard Time"
+			}
+		}
+	}
+}
