@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataFactorymsr"
 		},
+		"AzureDatabricksmsr_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricksmsr'"
+		},
 		"AzureSqlDatabase_Happy_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AzureSqlDatabase_Happy'"
@@ -18,6 +22,10 @@
 		"ls_adls_reporting_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_adls_reporting'"
+		},
+		"AzureDatabricksmsr_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1110-224202-7xmm01ap"
 		},
 		"AzureSqlDatabase_Happy_properties_typeProperties_server": {
 			"type": "string",
@@ -70,6 +78,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureDatabricksmsr_accessToken": {
+						"value": "[parameters('AzureDatabricksmsr_accessToken')]"
+					},
 					"AzureSqlDatabase_Happy_password": {
 						"value": "[parameters('AzureSqlDatabase_Happy_password')]"
 					},
@@ -78,6 +89,9 @@
 					},
 					"ls_adls_reporting_accountKey": {
 						"value": "[parameters('ls_adls_reporting_accountKey')]"
+					},
+					"AzureDatabricksmsr_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricksmsr_properties_typeProperties_existingClusterId')]"
 					},
 					"AzureSqlDatabase_Happy_properties_typeProperties_server": {
 						"value": "[parameters('AzureSqlDatabase_Happy_properties_typeProperties_server')]"

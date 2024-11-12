@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataFactorymsr"
 		},
+		"AzureDatabricksmsr_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricksmsr'"
+		},
 		"AzureSqlDatabase_Happy_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AzureSqlDatabase_Happy'"
@@ -18,6 +22,10 @@
 		"ls_adls_reporting_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_adls_reporting'"
+		},
+		"AzureDatabricksmsr_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1110-224202-7xmm01ap"
 		},
 		"AzureSqlDatabase_Happy_properties_typeProperties_server": {
 			"type": "string",
@@ -363,6 +371,42 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/df_transform_cases_death')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_process_population_data')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execution Population Transfer",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Reporting_Covid/transform_population_data"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricksmsr",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricksmsr')]"
 			]
 		},
 		{
@@ -950,6 +994,24 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ls_adls_reporting')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricksmsr')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-3952993784723250.10.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDatabricksmsr_accessToken')]"
+					},
+					"existingClusterId": "[parameters('AzureDatabricksmsr_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase_Happy')]",

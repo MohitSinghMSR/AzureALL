@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "DataFactorymsr"
 		},
+		"AzureDatabricksmsr_accessToken": {
+			"value": ""
+		},
 		"AzureSqlDatabase_Happy_password": {
 			"value": ""
 		},
@@ -13,6 +16,9 @@
 		},
 		"ls_adls_reporting_accountKey": {
 			"value": ""
+		},
+		"AzureDatabricksmsr_properties_typeProperties_existingClusterId": {
+			"value": "1110-224202-7xmm01ap"
 		},
 		"AzureSqlDatabase_Happy_properties_typeProperties_server": {
 			"value": "happyservermsr.database.windows.net"
