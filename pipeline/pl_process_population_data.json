@@ -1,0 +1,28 @@
+{
+	"name": "pl_process_population_data",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execution Population Transfer",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Reporting_Covid/transform_population_data"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricksmsr",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
