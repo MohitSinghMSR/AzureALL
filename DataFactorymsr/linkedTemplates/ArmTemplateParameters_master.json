@@ -38,6 +38,9 @@
 		"tr_populationData_properties_typeProperties_scope": {
 			"value": "/subscriptions/e418e5e7-fa19-48bd-95c2-fffb8c0f2d20/resourceGroups/dp203-8q21z67/providers/Microsoft.Storage/storageAccounts/storagenormalmsr"
 		},
+		"tr_population_data_arrived_properties_typeProperties_scope": {
+			"value": "/subscriptions/e418e5e7-fa19-48bd-95c2-fffb8c0f2d20/resourceGroups/dp203-8q21z67/providers/Microsoft.Storage/storageAccounts/storagenormalmsr"
+		},
 		"containerUri": {
 			"value": ""
 		},
