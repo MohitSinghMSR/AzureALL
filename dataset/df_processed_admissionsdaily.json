@@ -1,9 +1,12 @@
 {
-	"name": "df_admissionsdaily",
+	"name": "df_processed_admissionsdaily",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_adls_reporting",
 			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "processed"
 		},
 		"annotations": [],
 		"type": "DelimitedText",

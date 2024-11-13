@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "Hospital_Admission",
+						"referenceName": "ds_Hospital_Admission_raw",
 						"type": "DatasetReference"
 					},
 					"name": "HospitalAdmissionSource"
@@ -29,7 +29,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "df_admissionsdaily",
+						"referenceName": "df_processed_admissionsdaily",
 						"type": "DatasetReference"
 					},
 					"name": "dailysink"

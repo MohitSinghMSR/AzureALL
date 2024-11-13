@@ -1,9 +1,12 @@
 {
-	"name": "Hospital_Admission",
+	"name": "ds_Hospital_Admission_raw",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_adls_reporting",
 			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "raw"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
